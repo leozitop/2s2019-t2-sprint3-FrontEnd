@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<head>
+
+    <title>InLock - Personagens</title>
+
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <table id="tabela-lista">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Título</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+
+        <tbody id="tabela-lista-corpo"></tbody>
+    </table>
+
+    <script>    
+        const tabela = document.querySelector('#tabela-lista-corpo');
+
+        window.onload = () => {
+
+            const URL = 'https://salty-atoll-57329.herokuapp.com/personagens';
+            fetch(URL)
+            .then(resposta => resposta.json())
+            .then(data => preencherTabela())
+            .catch(erro => console.log(erro));
+
+            function preencherTabela(personagens) {
+                personagens.foreach((element) => {
+                    const tr = document.createElement('tr');
+                    const td_nome = document.createElement('#');
+                    const td_titulo = document.createElement('Titulo');
+                    const td_acao = document.createElement('Ação')
+
+                    td_nome.textContent = element.nome;
+                    td_titulo.textContent = element.personagem;
+                    td_acao.textContent = element.urlImagem;
+
+                    tabela.appendChild('tr');
+                    tr.appendChild('td_nome');
+                    tr.appendChild('td_titulo');
+                    tr.appendChild('td_acao');
+                });
+            }
+        }
+    </script>
+
+</body>
+
+</html>
