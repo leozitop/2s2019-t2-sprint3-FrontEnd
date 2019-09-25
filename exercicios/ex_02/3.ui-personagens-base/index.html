@@ -42,6 +42,7 @@
 
             function preencherTabela(personagens) {
                 personagens.foreach((element) => {
+                console.log(personagens);
                     const tr = document.createElement('tr');
                     const td_nome = document.createElement('td');
                     const td_lancamento = document.createElement('td');
@@ -49,7 +50,7 @@
 
                     td_nome.textContent = element.nome;
                     td_lancamento.textContent = element.lancamento;
-                    td_imagem.textContent = element.urlImagem;
+                    td_imagem.innerHTML = "<img style='width: 60px;' src='" + element.urlImagem + "'>";
 
                     tr.appendChild('td_nome');
                     tr.appendChild('td_titulo');

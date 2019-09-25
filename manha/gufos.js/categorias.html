@@ -115,7 +115,7 @@
 
         fetch(URL).then(resposta => resposta.json()).then(data => preencherTabela(data)).catch(erro => console.log(erro));
 
-        function preencherTabela() {
+        function preencherTabela(data) {
           // pra cada elemento em categorias
           categorias.foreach((element) => {
           const tr = document.createElement('tr');

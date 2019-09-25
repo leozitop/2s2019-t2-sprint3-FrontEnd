@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PokéFront</title>
+    <link rel="stylesheet" href="Css/style.css">
+</head>
+<body>
+    <div>
+        <img src="img/pikatu.htm" alt="">
+        <h1>PokéFront</h1>
+    </div>
+    <section id = "buscar_pokemon">
+        <div class="container" id="conteudoPrincipal-lista">
+            <table id="tabela-lista">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Abilities</th>
+                        <th>Width</th>
+                        <th>Height</th>
+                        <th>Image</th>
+                    </tr>
+                </thead>
+          
+                <tbody id="tabela"></tbody>
+            </table>
+        </div>
+
+        <div class="container" id="form">
+            <form action="" method="post">
+                <h2>Busque seu Pokémon</h2>
+                <div class = "Input">
+                    <input type="text" id="nomePokemon" placeholder="Nome do Pokémon">
+                </div>
+                <div class = "Button">
+                    <button id="btnProcurar">
+                        Procurar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        input = document.querySelector('#nomePokemon');
+        btnProcurar = document.querySelector('#btnProcurar');
+        tabela = document.querySelector('#tabela')
+        
+        window.onload = () => {
+            const URL = 'https://pokeapi.co/api/v2/pokemon';
+            fetch(URL).then(resposta => resposta.json).then(pokemons => preencherTabela(pokemons)).catch(erro => console.log(erro));
+
+            function preencherTabela(pokemons) {
+                data.results.forEach((element) => {
+                const tr = document.createElement('tr');
+                const td_name = document.createElement('td');
+                td_name.textContent = element.name;
+                const td_ability = document.createElement('td');
+                td_ability.textContent = element.ability;
+                const td_width = document.createElement('td');
+                td_width.textContent = element.width;
+                const td_height = document.createElement('td');
+                td_height.textContent = element.height;
+                const td_img = document.createElement('td');
+                td_img.innerHTML = "";
+            });
+            }
+        }
+        
+
+        btnProcurar.addEventListener('click', function (){
+            event.preventDefault();
+            let objJson = {
+                nome: input.value
+            };
+            let xhr = new XMLHttpRequest();
+            xhr.onload = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    console.log('Sucesso');
+                }else{
+                    console.log('Falha');
+                }
+            }
+            xhr.open('POST', 'https://pokeapi.co/docs/v2.html/pokemons', true);
+            xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+            xhr.send(JSON.stringify(objJson));
+        })
+    </script>
+</body>
+</html>
