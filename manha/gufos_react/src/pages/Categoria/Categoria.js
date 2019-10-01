@@ -10,28 +10,64 @@ import Rodape from '../../components/Rodape/Rodape';
 // criar um componente - classNamee categoria usando Component
 class Categoria extends Component{
 
+    // estrutura de state => atributos
+    // constrói a estrutura
     constructor(){
         // herda tudo o que estiver em component
         super();
         this.state = {
+            // a lista é como se fosse um atributo
             lista: [
                 // {idCategoria: 1, nome: "Design"},
                 // {idCategoria: 2, nome: "Jogos"},
                 // {idCategoria: 3, nome: "Meetup"}
-            ]
+            ],
+            nome: ''
         };
     }
 
+    // fetch depois que o componente for renderizado
     componentDidMount(){
         fetch('http://localhost:5000/api/categorias')
+            // converte em json
             .then(response => response.json())
-            // lista vai receber os valores de data
+            // lista vai receber os valores de data depois que for convertido em json
             .then(data => this.setState({lista: data}));
     }
 
+    // a arrow function serve pra procurar a função na própria clase
     adicionaItem = (event) =>{
         event.preventDefault();
-        this.setState({lista:[{idCategoria: 4, nome: "Nova Categoria"}]});
+
+        fetch('http://localhost:5000/api/categorias', {
+            method: 'POST',
+            body: JSON.stringify({nome: this.state.nome }),// valor do input
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => console.log(response.json()))
+        .then(data => console.log(data))
+        .catch(error => console.log(error))
+    }
+
+    adicionaCategoria = () =>{
+        // pega os valores da lista
+        let valores_lista = this.state.lista;
+        let categoria = {idCategoria: this.state.lista.length,
+            nome: this.state.nome}
+
+        // adiciona
+        valores_lista.push(categoria);
+        this.setState({lista: valores_lista});
+        // this referencía Categoria
+    }
+
+    atualizarNome = (event) =>{
+        // setState toda vez que for alterar o estado
+        // captura o que a pessoa está digitando no input
+        this.setState({nome: event.target.value});
+        console.log(this.state);
     }
 
     render(){
@@ -83,9 +119,11 @@ class Categoria extends Component{
                             className="className__categoria"
                             id="input__categoria"
                             placeholder="tipo do evento"
+                            value={this.state.nome}
+                            onInput={this.atualizarNome}
                             />
                             <button
-                            onClick={this.adicionaItem}
+                            onClick={this.adicionaItem.bind(this)}
                             id="btn__cadastrar"
                             className="conteudoPrincipal-btn conteudoPrincipal-btn-cadastro"
                             >

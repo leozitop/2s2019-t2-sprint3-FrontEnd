@@ -5,19 +5,39 @@ import './index.css';
 // componente
 import App from './pages/Home/App';
 import Categoria from './pages/Categoria/Categoria';
+import Login from './pages/Login/Login';
 import NaoEncontrado from './pages/NaoEncontrado/NaoEncontrado';
 
 import * as serviceWorker from './serviceWorker';
 
 // rotas
-import {Route, Link, BrowserRouter as Router, Switch} from 'react-router-dom';
+import {Route, Link, BrowserRouter as Router, Switch, Redirect} from 'react-router-dom';
+
+const RotaPrivada = ({component: Component, ...rest}) =>(
+    <Route
+        {...rest}
+        render={props =>
+            localStorage.getItem("usuario-gufos") !== null ? 
+                <Component {...props} />
+            : 
+                <Redirect
+                // caminho a ser redirecionado
+                    to={{ pathname: "/login", 
+                    state: {from: props.location} }} 
+                />
+        }
+    >
+    </Route>
+)
 
 const routing = (
     <Router>
         <div>
             <Switch>
+                {/* passa o componente que vai se renderizado */}
                 <Route exact path='/' component={App} />
-                <Route path='/categoria' component={Categoria} />
+                <RotaPrivada path='/categoria' component={Categoria} />
+                <Route path='/login' component={Login}/>
                 <Route component={NaoEncontrado}/>
             </Switch>
         </div>
