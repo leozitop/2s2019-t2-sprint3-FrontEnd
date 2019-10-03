@@ -36,14 +36,14 @@ class Login extends Component{
             if(response.status === 200){
                 console.log(response.data.token);
                 // props => propriedades => herança
+                localStorage.setItem("usuario-gufos", response.data.token);
                 this.props.history.push('/categoria');
             }else{
                 console.log('vish deu ruim parça');
-                localStorage.setItem("usuario-gufos", response.data.token);
             }
         })
         .catch(erro => {
-            this.setState({erro: "Usuário ou senha inválidos"}),
+            this.setState({erro: "Usuário ou senha inválidos"});
             console.log(erro);
         });
     }

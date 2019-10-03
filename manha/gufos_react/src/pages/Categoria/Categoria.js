@@ -6,6 +6,7 @@ import logo from '../../assets/img/icon-login.png';
 
 // component
 import Rodape from '../../components/Rodape/Rodape';
+import Titulo from '../../components/Titulo/Titulo';
 
 // criar um componente - classNamee categoria usando Component
 class Categoria extends Component{
@@ -28,6 +29,10 @@ class Categoria extends Component{
 
     // fetch depois que o componente for renderizado
     componentDidMount(){
+        this.listaAtualizada();
+    }
+
+    listaAtualizada = () =>{
         fetch('http://localhost:5000/api/categorias')
             // converte em json
             .then(response => response.json())
@@ -38,7 +43,7 @@ class Categoria extends Component{
     // a arrow function serve pra procurar a função na própria clase
     adicionaItem = (event) =>{
         event.preventDefault();
-
+        console.log(this.state.nome);
         fetch('http://localhost:5000/api/categorias', {
             method: 'POST',
             body: JSON.stringify({nome: this.state.nome }),// valor do input
@@ -46,8 +51,7 @@ class Categoria extends Component{
                 'Content-Type': 'application/json'
             }
         })
-        .then(response => console.log(response.json()))
-        .then(data => console.log(data))
+        .then(this.listaAtualizada())
         .catch(error => console.log(error))
     }
 
@@ -84,7 +88,8 @@ class Categoria extends Component{
 
                 <main className="conteudoPrincipal">
                     <section className="conteudoPrincipal-cadastro">
-                    <h1 className="conteudoPrincipal-cadastro-titulo">Categorias</h1>
+                    <Titulo titulo="Categorias"/>
+                    {/* <h1 className="conteudoPrincipal-cadastro-titulo">Categorias</h1> */}
                     <div className="container" id="conteudoPrincipal-lista">
                         <table id="tabela-lista">
                         <thead>

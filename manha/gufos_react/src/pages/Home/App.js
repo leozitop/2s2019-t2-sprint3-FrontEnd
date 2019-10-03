@@ -8,6 +8,7 @@ import '../../assets/css/style.css';
 import '../../assets/css/reset.css';
 
 import logo from '../../assets/img/icon-login.png';
+import Titulo from '../../components/Titulo/Titulo';
 
 import {Link} from 'react-router-dom'
 
@@ -22,7 +23,7 @@ function App() {
 
           <nav className="cabecalhoPrincipal-nav">
             <a>Home</a>
-            <a>Eventos</a>
+            <Link to="/eventos">Eventos</Link>
             <a>Contato</a>
             <Link className="cabecalhoPrincipal-nav-login" to="/login">Login</Link>
           </nav>
@@ -31,7 +32,8 @@ function App() {
 
       <section className="conteudoImagem">
         <div>
-          <h1>Gufos</h1>
+          <Titulo titulo="Gufos" />
+          {/* <h1>Gufos</h1> */}
           <h2>Área de eventos da Escola SENAI de Informática.</h2>
         </div>
       </section>
