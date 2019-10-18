@@ -7,46 +7,45 @@ import Axios from 'axios';
 
 class Login extends Component{
 
-    // constructor(){
-    //     // faz referencia ao Component
-    //     super();
-    //     this.state = {
-    //         email: "",
-    //         senha: "",
-    //         erro: ""
-    //     }
-    // }
+    constructor(){
+        // faz referencia ao Component
+        super();
+        this.state = {
+            email: "",
+            senha: "",
+            erro: ""
+        }
+    }
 
-    // atualizaEstadoEmail = (event) =>{
-    //     this.setState({email: event.target.value});
-    // }
+    atualizaEstadoEmail = (event) =>{
+        this.setState({email: event.target.value});
+    }
 
-    // atualizaEstadoSenha = (event) =>{
-    //     this.setState({senha: event.target.value});
-    // }
+    atualizaEstadoSenha = (event) =>{
+        this.setState({senha: event.target.value});
+    }
 
-    // efetuarLogin = (event) =>{
-    //     event.preventDefault();
+    efetuarLogin = (event) =>{
+        event.preventDefault();
 
-    //     Axios.post("http://:5000/api/login", {
-    //         email: this.state.email,
-    //         senha: this.state.senha
-    //     })
-    //     .then(response => {
-    //         if(response.status === 200){
-    //             console.log(response.data.token);
-    //             // props => propriedades => herança
-    //             localStorage.setItem("usuario-opflix", response.data.token);
-    //             this.props.history.push('/categoria');
-    //         }else{
-    //             console.log('vish deu ruim parça');
-    //         }
-    //     })
-    //     .catch(erro => {
-    //         this.setState({erro: "Usuário ou senha inválidos"});
-    //         console.log(erro);
-    //     });
-    // }
+        Axios.post("http://localhost:5000/api/login", {
+            email: this.state.email,
+            senha: this.state.senha
+        })
+        .then(response => {
+            if(response.status === 200){
+                // props => propriedades => herança
+                localStorage.setItem("usuario-opflix", response.data.token);
+                console.log(response.data.token);
+            }else{
+                console.log('vish deu ruim');
+            }
+        })
+        .catch(erro => {
+            this.setState({erro: "Usuário ou senha inválidos"});
+            console.log(erro);
+        });
+    }
 
     render(){
         return(
@@ -59,7 +58,7 @@ class Login extends Component{
                     <img src= {logo} className="icone__login" />
                 </div>
                 
-                <form>
+                <form onSubmit={this.efetuarLogin}>
                     <div className="item" id="item__title">
                         <p className="text__login" id="item__description">
                         Login
@@ -70,6 +69,7 @@ class Login extends Component{
                     <input
                         className="input__login"
                         placeholder="email"
+                        onInput={this.atualizaEstadoEmail}
                         type="text"
                         name="username"
                         id="login__email"
@@ -85,6 +85,7 @@ class Login extends Component{
                     <input
                         className="input__login"
                         placeholder="senha"
+                        onInput={this.atualizaEstadoSenha}
                         type="password"
                         name="password"
                         id="login__password"

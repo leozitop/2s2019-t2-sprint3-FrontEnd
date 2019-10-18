@@ -6,6 +6,9 @@ import App from './pages/Home/App';
 import NaoEncontrado from './pages/NaoEncontrado/NaoEncontrado';
 import Login from './pages/Login/Login';
 import Cadastro from './pages/Cadastro/Cadastro';
+import Lancamentos from './pages/Lancamentos/Lancamentos';
+import TelaAdm from './pages/TelaAdm/TelaAdm';
+import TelaAdm_User from './pages/TelaAdm_User/TelaAdm_User';
 
 import * as serviceWorker from './serviceWorker';
 import {Route, Link, BrowserRouter as Router, Switch} from 'react-router-dom';
@@ -18,6 +21,9 @@ const routing = (
                 <Route exact path='/' component={App} />
                 <Route path='/login' component={Login}/>
                 <Route path='/cadastro' component={Cadastro}/>
+                <Route path='/lancamentos' component={Lancamentos}/>
+                <Route path='/telaAdm' component={TelaAdm}/>
+                <Route path='/telaAdmUser' component={TelaAdm_User}/>
                 <Route component={NaoEncontrado}/>
             </Switch>
         </div>

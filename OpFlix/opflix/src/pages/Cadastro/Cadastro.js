@@ -1,8 +1,59 @@
 import React,{Component} from 'react';
 
-import logo from '../../assets/img/OpFlix_logo.png'
+import logo from '../../assets/img/OpFlix_logo.png';
 
 export default class Cadastro extends Component{
+
+    constructor(){
+        super();
+        this.state = {
+            lista: [],
+            nome: '',
+            email: '',
+            senha: '',
+            tipoUsuario: ''
+        };
+    }
+
+    // componentDidMount(){
+    //     this.listaAtualizada();
+    // }
+
+    // listaAtualizada = () =>{
+    //     fetch('http://localhost:5000/api/categorias')
+    //         .then(response => response.json())
+    //         .then(data => this.setState({lista: data}));
+    // }
+
+    // adicionaItem = (event) =>{
+    //     event.preventDefault();
+    //     console.log(this.state.nome);
+    //     // localhost:5000
+    //     fetch('http://localhost:5000/api/eventos', {
+    //         method: 'POST',
+    //         body: JSON.stringify({nome: this.state.nome, email: this.state.email,
+    //         senha: this.state.senha, tipoUsuario: this.state.tipoUsuario}),
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     })
+    //     .then(this.listaAtualizada())
+    //     .catch(error => console.log(error))
+    // }
+
+    // adicionaEvento = () =>{
+    //     let valores_lista = this.state.lista;
+    //     let usuario = {idUsuario: this.state.lista.length,
+    //         nome: this.state.nome,
+    //         email: this.state.email,
+    //         senha: this.state.senha,
+    //         tipoUsuario: this.state.tipoUsuario
+    //         }
+
+    //     valores_lista.push(usuario);
+    //     this.setState({lista: valores_lista});
+    // }
+
     render(){
         return(
             <section className="container flex">
@@ -64,7 +115,10 @@ export default class Cadastro extends Component{
                     </p>
                     </div>
                     <div className="item">
-                    <button className="btn btn__cadastro" id="btn__cadastro">
+                    <button  
+                            id="btn__cadastrar"
+                            className="conteudoPrincipal-btn conteudoPrincipal-btn-cadastro"
+                            >
                         Cadastrar
                     </button>
 

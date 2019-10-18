@@ -25,7 +25,7 @@ export default class Eventos extends Component{
 
     listaAtualizada = () =>{
         Axios.get('http://192.168.7.85/api/eventos')
-        // sempre q faço uma requisição eu envio e recebo algo (ata)
+        // sempre q faço uma requisição eu envio e recebo algo (data)
             .then(data => {
                 // o meu data será meu json, dentro dele eu vou ter uma chve chamada data
                 this.setState({lista: data.data});
