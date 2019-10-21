@@ -37,6 +37,7 @@ class Login extends Component{
                 // props => propriedades => herança
                 localStorage.setItem("usuario-opflix", response.data.token);
                 console.log(response.data.token);
+                this.props.history.push('/lancamentos');
             }else{
                 console.log('vish deu ruim');
             }

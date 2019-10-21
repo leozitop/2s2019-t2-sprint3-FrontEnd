@@ -2,7 +2,7 @@ import React from 'react';
 
 // import '../../assets/css/flexbox.css';
 // import '../../assets/css/login.css';
-// import '../../assets/css/style.css';
+import '../../assets/css/style.css';
 // import '../../assets/css/reset.css';
 
 import logo from '../../assets/img/OpFlix_logo.png';
@@ -10,6 +10,7 @@ import face from '../../assets/img/OpFlix_facebook.jpg';
 import insta from '../../assets/img/OpFlix_instagram.jpg';
 import twitter from '../../assets/img/OpFlix_twitter.png';
 import destaque_1 from '../../assets/img/Coringa_destaque.jpg';
+//import play from '../../assets/img/';
 
 import './App.css';
 import Titulo from '../../components/Titulo/Titulo';
@@ -24,19 +25,21 @@ function App() {
           {/* referente ao java script */}
           <img src={logo} />
 
-          <nav className="cabecalhoPrincipal-nav">
+          <div className="cabecalhoPrincipal-nav">
+          <nav>
             <a>Home</a>
             <a>Lancamentos</a>
             <Link className="cabecalhoPrincipal-nav-login" to="/login">Login</Link>
           </nav>
+          </div>
         </div>
       </header>
 
       <section className="conteudoImagem">
-        <div>
-          <Titulo titulo="OpFlix" />
+        <div className="conteudoPrincipal-banner">
+          {/* <img src={play}/> */}
           {/* <h1>Gufos</h1> */}
-          <h1>Dê um play no que te deixa feliz com o OpFlix.</h1>
+          <h2>Dê um play no que te deixa feliz com o OpFlix.</h2>
         </div>
       </section>
       

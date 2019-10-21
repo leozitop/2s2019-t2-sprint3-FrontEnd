@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 
 import logo from '../../assets/img/OpFlix_logo.png';
+import Axios from 'axios';
 
 export default class Cadastro extends Component{
 
@@ -15,44 +16,70 @@ export default class Cadastro extends Component{
         };
     }
 
-    // componentDidMount(){
-    //     this.listaAtualizada();
-    // }
+    componentDidMount(){
+        this.listaAtualizada();
+    }
 
-    // listaAtualizada = () =>{
-    //     fetch('http://localhost:5000/api/categorias')
-    //         .then(response => response.json())
-    //         .then(data => this.setState({lista: data}));
-    // }
+    listaAtualizada = () =>{
+        fetch('http://localhost:5000/api/usuarios', {
+            headers: {
+                Accept: 'application/json',
+                Authorization: 'Bearer ' + localStorage.getItem('usuario-opflix')
+                // 'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => this.setState({lista: data}));
+        // Axios.get('http://localhost:5000/api/usuarios', {
+        //     headers: {
+        //         Authorization: 'Bearer ' + localStorage.getItem('usuario-opflix')
+        //     }
+        // })
+        // .then(data =>{
+        //     console.log(data);
+        // })
+    }
 
-    // adicionaItem = (event) =>{
-    //     event.preventDefault();
-    //     console.log(this.state.nome);
-    //     // localhost:5000
-    //     fetch('http://localhost:5000/api/eventos', {
-    //         method: 'POST',
-    //         body: JSON.stringify({nome: this.state.nome, email: this.state.email,
-    //         senha: this.state.senha, tipoUsuario: this.state.tipoUsuario}),
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         }
-    //     })
-    //     .then(this.listaAtualizada())
-    //     .catch(error => console.log(error))
-    // }
+    adicionaItem = (event) =>{
+        event.preventDefault();
+        console.log(this.state.nome);
+        fetch('http://localhost:5000/api/usuarios', {
+            method: 'POST',
+            body: JSON.stringify({nome: this.state.nome, email: this.state.email,
+            senha: this.state.senha, tipoUsuario: this.state.tipoUsuario}),
+            headers: {
+                Authorization: 'Bearer' + localStorage.getItem('usuario-opflix'),
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(this.listaAtualizada())
+        .catch(error => console.log(error))
+    }
 
-    // adicionaEvento = () =>{
-    //     let valores_lista = this.state.lista;
-    //     let usuario = {idUsuario: this.state.lista.length,
-    //         nome: this.state.nome,
-    //         email: this.state.email,
-    //         senha: this.state.senha,
-    //         tipoUsuario: this.state.tipoUsuario
-    //         }
+    atualizarNome = (event) =>{
+        this.setState({nome: event.target.value});
+    }
 
-    //     valores_lista.push(usuario);
-    //     this.setState({lista: valores_lista});
-    // }
+    atualizarEmail = (event) =>{
+        this.setState({email: event.target.value});
+    }
+
+    atualizarSenha = (event) =>{
+        this.setState({senha: event.target.value});
+    }
+
+    adicionaUsuario = () =>{
+        let valores_lista = this.state.lista;
+        let usuario = {idUsuario: this.state.lista.length,
+            nome: this.state.nome,
+            email: this.state.email,
+            senha: this.state.senha,
+            tipoUsuario: this.state.tipoUsuario
+            }
+
+        valores_lista.push(usuario);
+        this.setState({lista: valores_lista});
+    }
 
     render(){
         return(
@@ -75,6 +102,8 @@ export default class Cadastro extends Component{
                         className="input__cadastro"
                         placeholder="nome"
                         type="text"
+                        value={this.state.nome}
+                        onInput={this.atualizarNome}
                         name="username"
                         id="cadastro__nome"
                     />
@@ -90,6 +119,8 @@ export default class Cadastro extends Component{
                         className="input__cadastro"
                         placeholder="email"
                         type="text"
+                        value={this.state.email}
+                        onInput={this.atualizarEmail}
                         name="username"
                         id="cadastro__email"
                     />
@@ -105,17 +136,26 @@ export default class Cadastro extends Component{
                         className="input__cadastro"
                         placeholder="senha"
                         type="password"
+                        value={this.state.senha}
+                        onInput={this.atualizarSenha}
                         name="password"
                         id="cadastro__password"
                     />
-                    <p 
-                        className="text__cadastro"
-                        style={{color: "red", textAlign: "center"}}
-                    >
-                    </p>
                     </div>
+
+                    <div className="item">
+                    <p>Tipo do Usuario</p>
+                    <select>
+                        <option value='0' disabled>permissao</option>
+                        <option value={this.state.tipoUsuario}>Administrador</option>
+                        <option value={this.state.tipoUsuario}>Cliente</option>
+                    </select>
+                    </div>
+
+
                     <div className="item">
                     <button  
+                            onClick={this.adicionaItem}
                             id="btn__cadastrar"
                             className="conteudoPrincipal-btn conteudoPrincipal-btn-cadastro"
                             >

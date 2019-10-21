@@ -3,6 +3,8 @@ import React,{Component} from 'react';
 import logo from '../../assets/img/OpFlix_logo.png'
 import Titulo from '../../components/Titulo/Titulo'
 
+import cartaz1 from '../../assets/img/cartaz_joker.jpg'
+
 import Axios from 'axios';
 
 export default class Lancamentos extends Component{
@@ -22,10 +24,6 @@ export default class Lancamentos extends Component{
     }
 
     componentDidMount(){
-        this.listaAtualizada();
-    }
-
-    listaAtualizada = () =>{
         Axios.get('http://localhost:5000/api/lancamentos')
             .then(data => {
                 this.setState({lista: data.data});
@@ -34,6 +32,10 @@ export default class Lancamentos extends Component{
                 console.log(erro);
             });
     }
+
+    // listaAtualizada = () =>{
+        
+    // }
 
     render(){
         return(
@@ -51,19 +53,32 @@ export default class Lancamentos extends Component{
                     <div className="container" id="conteudoPrincipal-lista">
                         <form>
                             <select>
-                                <option>Categorias</option>
+                                <option value='1'>Ação</option>
+                                <option value='2'>Terror</option>
+                                <option value='3'>Romance</option>
+                                <option value='4'>Ficçãoo</option>
+                                <option value='5'>Comédia</option>
+                                <option value='6'>Drama</option>
+                                <option value='7'>Suspense</option>
+                                <option value='8'>Aventura</option>
+                                <option value='9'>Documentário</option>
+                                <option value='10'>Animação</option>
+                                <option value='11'>Bio</option>
                             </select>
 
                             <select>
-                                <option>Plataformas</option>
+                                <option value='1'>Netflix</option>
+                                <option value='2'>Cinema</option>
+                                <option value='3'>Amazon</option>
                             </select>
 
                             <select>
-                                <option>Tipo</option>
+                                <option value='1'>Filme</option>
+                                <option value='2'>Serie</option>
                             </select>
                         </form>
 
-                        <table id="tabela-lista">
+                        {/* <table id="tabela-lista">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -97,7 +112,20 @@ export default class Lancamentos extends Component{
                                 })
                             }
                         </tbody>
-                        </table>
+                        </table> */}
+                        <br></br>
+
+                        <br></br>
+
+                        <div class="cartaz1">
+                            <img src={cartaz1}/>
+                            <p>Joker</p>
+                            <p>categoria: </p>
+                            <p>182 min</p>
+                            <p>tipo: filme</p>
+                            <p>03/10/2019</p>
+                            <p>cinema</p>
+                        </div>
 
                     </div>
                     </section>

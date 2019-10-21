@@ -11,7 +11,24 @@ import TelaAdm from './pages/TelaAdm/TelaAdm';
 import TelaAdm_User from './pages/TelaAdm_User/TelaAdm_User';
 
 import * as serviceWorker from './serviceWorker';
-import {Route, Link, BrowserRouter as Router, Switch} from 'react-router-dom';
+import {Route, Link, BrowserRouter as Router, Switch, Redirect} from 'react-router-dom';
+
+const RotaPrivada = ({component: Component}) =>(
+    <Route
+        render={props =>
+            localStorage.getItem("usuario-opflix") !== null ? 
+                // se for diferente de nulo ele vai pra categorias
+                <Component {...props} />
+            : 
+                <Redirect
+                // caminho a ser redirecionado. Caso valor nulo ele volta pro login
+                    to={{ pathname: "/login", 
+                    state: {from: props.location} }} 
+                />
+        }
+    >
+    </Route>
+)
 
 const routing = (
     <Router>
@@ -21,7 +38,7 @@ const routing = (
                 <Route exact path='/' component={App} />
                 <Route path='/login' component={Login}/>
                 <Route path='/cadastro' component={Cadastro}/>
-                <Route path='/lancamentos' component={Lancamentos}/>
+                <RotaPrivada path='/lancamentos' component={Lancamentos}/>
                 <Route path='/telaAdm' component={TelaAdm}/>
                 <Route path='/telaAdmUser' component={TelaAdm_User}/>
                 <Route component={NaoEncontrado}/>
