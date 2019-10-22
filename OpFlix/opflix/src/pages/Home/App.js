@@ -13,7 +13,6 @@ import destaque_1 from '../../assets/img/Coringa_destaque.jpg';
 //import play from '../../assets/img/';
 
 import './App.css';
-import Titulo from '../../components/Titulo/Titulo';
 import {Link} from 'react-router-dom';
 
 function App() {
@@ -28,7 +27,7 @@ function App() {
           <div className="cabecalhoPrincipal-nav">
           <nav>
             <a>Home</a>
-            <a>Lancamentos</a>
+            <Link className="cabecalhoPrincipal-nav-lancamentos" to="/lancamentos">Lancamentos</Link>
             <Link className="cabecalhoPrincipal-nav-login" to="/login">Login</Link>
           </nav>
           </div>

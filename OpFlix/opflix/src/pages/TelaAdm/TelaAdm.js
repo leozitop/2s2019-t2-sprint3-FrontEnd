@@ -1,185 +1,128 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 
 import logo from '../../assets/img/OpFlix_logo_adm.png';
+import { Link } from 'react-router-dom';
+import Axios from 'axios';
 
-export default class TelaAdm extends Component{
-    render(){
-        return(
-            <section className="container flex">
-                <div className="item__cadastro">
-                    <div className="row">
-                    <div className="item">
-                        <img src= {logo} className="icone__cadastro" />
-                    </div>
-                    
-                        <div className="item" id="item__title">
-                            <h1>
-                            Cadastro de:
-                            </h1>
-                        </div>
+export default class TelaAdm extends Component {
 
-                    <form>
-                        <h2>Categoria</h2>
+  constructor() {
+    super();
+    this.state = {
+      lista: [],
+      nome: ''
+    };
+    // this.adicionaItem = this.adicionaItem.bind(this);
+  }
 
-                        <div className="item">
-                        <p>Nome</p>
-                        <input
-                            className="input__cadastro"
-                            placeholder="nome"
-                            type="text"
-                            name="name_categoria"
-                        />
-                        </div>
+  componentDidMount() {
+    this.listaCagtegoria();
+  }
 
-                        <br/>
+ // *CATEGORIAS* 
+  listaCagtegoria = (event) => {
+    Axios.get('http://localhost:5000/api/categorias', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer' + localStorage.getItem('usuario-opflix')
+      }
+    })
+      .then(resposta => {
+        console.log(resposta);
+        this.setState({ lista: resposta.data });
+      })
+      .catch(erro => {
+        console.log(erro);
+      });
+  }
 
-                        <div>
-                        <p 
-                            className="text__cadastro"
-                            style={{color: "red", textAlign: "center"}}
-                        >
-                        </p>
-                        </div>
-                        <div className="item">
-                        <button  
-                                className="conteudoPrincipal-btn conteudoPrincipal-btn-cadastro"
-                                >
-                            Cadastrar
-                        </button>
+  //criar uma funcao para enviar os dados para a api
+  adicionaItem = (event) => {
+    event.preventDefault();
+    fetch('http://localhost:5000/api/categorias', {
+      method: 'POST',
+      body: JSON.stringify({ nome: this.state.nome }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('usuario-opflix')
+      }
+    })
+      .then(response => response.json())
+      .then(this.componentDidMount())
+      .catch(erro => console.log(erro));
+  }
 
-                        </div>
-                    </form>
+  adicionaCategoria = () => {
+    let valores_lista = this.state.lista;
+    let categoria = { nome: this.state.nome }
 
-                    
+    valores_lista.push(categoria);
 
-                    <form>
-                        <h2>Plataforma</h2>
+    this.setState({ lista: valores_lista });
+  }
 
-                        <div className="item">
-                        <p>Nome</p>
-                        <input
-                            className="input__cadastro"
-                            placeholder="nome"
-                            type="text"
-                            name="name_plataforma"
-                        />
-                        </div>
+  atualizarNome = (event) => {
+    this.setState({ nome: event.target.value })
+  }
 
-                        <br/>
+  render() {
+    return (
+      <section className="container flex">
+        <div className="item__cadastro">
+          <div className="row">
+            <div className="item">
+              <img src={logo} className="icone__cadastro" />
+            </div>
 
-                        <div>
-                        <p 
-                            className="text__cadastro"
-                            style={{color: "red", textAlign: "center"}}
-                        >
-                        </p>
-                        </div>
-                        <div className="item">
-                        <button  
-                                className="conteudoPrincipal-btn conteudoPrincipal-btn-cadastro"
-                                >
-                            Cadastrar
-                        </button>
+            <div className="item" id="item__title">
+              <h2>
+                Tela do Administrador
+              </h2>
+            </div>
 
-                        </div>
-                    </form>
+            <div>
+              <table id="tabela-lista-categorias">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Nome</th>
+                  </tr>
+                </thead>
 
-                    
+                <tbody id="tabela-lista-corpo">
+                  {
+                    // map retorna algo, funciona como se fosse um foreach
+                    this.state.lista.map(element => {
+                      return (
+                        <tr>
+                          <td>{element.idCategoria}</td>
+                          <td>{element.nome}</td>
+                        </tr>
+                      )
+                    })
+                  }
+                </tbody>
+              </table>
 
-                    <form>
-                        <h2>Lancamento</h2>
-
-                        <div className="item">
-                        <p>Nome</p>
-                        <input
-                            className="input__cadastro"
-                            placeholder="nome"
-                            type="text"
-                            name="name_lancamento"
-                        />
-                        </div>
-
-                        <div className="item">
-                        <p>Sinopse</p>
-                        <input
-                            className="input__cadastro"
-                            placeholder="sinopse"
-                            type="text"
-                            name="sinopse_lancamento"
-                        />
-                        </div>
-
-                        <div className="item">
-                        <p>Categoria</p>
-                        <input
-                            className="input__cadastro"
-                            placeholder="categoria"
-                            type="text"
-                            name="categoria_lancamento"
-                        />
-                        </div>
-
-                        <div className="item">
-                        <p>Duracao</p>
-                        <input
-                            className="input__cadastro"
-                            placeholder="duracao (min)"
-                            type="text"
-                            name="duracao_lancamento"
-                        />
-                        </div>
-
-                        <div className="item">
-                        <p>Tipo</p>
-                        <input
-                            className="input__cadastro"
-                            placeholder="tipo"
-                            type="text"
-                            name="tipo_lancamento"
-                        />
-                        </div>
-
-                        <div className="item">
-                        <p>Data de Lancamento</p>
-                        <input
-                            className="input__cadastro"
-                            placeholder="dd/MM/yyyy"
-                            type="text"
-                            name="data_lancamento"
-                        />
-                        </div>
-
-                        <div className="item">
-                        <p>Plataforma</p>
-                        <input
-                            className="input__cadastro"
-                            placeholder="nome"
-                            type="text"
-                            name="plataforma_lancamento"
-                        />
-                        </div>
-
-                        <br/>
-
-                        <div>
-                        <p 
-                            className="text__cadastro"
-                            style={{color: "red", textAlign: "center"}}
-                        >
-                        </p>
-                        </div>
-                        <div className="item">
-                        <button  
-                                className="conteudoPrincipal-btn conteudoPrincipal-btn-cadastro"
-                                >
-                            Cadastrar
-                        </button>
-
-                        </div>
-                    </form>
-                    </div>
+              <form onSubmit={this.adicionaItem}>
+                <div className="container">
+                  <input type="text"
+                    onInput={this.atualizarNome}
+                    value={this.state.nome}
+                    id="categoria__titulo"
+                    placeholder="nome" />
                 </div>
-            </section>
-        );
-    }
+                <button className="conteudoPrincipal-btn conteudoPrincipal-btn-cadastro"
+                >Cadastrar</button>
+                <button OnClick={this.listaCategoria}>Listar Categorias</button>
+              </form>
+            </div>
+
+            
+            <Link className='link-telaUsuarios' to='/telaAdmUser'>Ir para Usuarios</Link>
+          </div>
+        </div>
+      </section>
+    );
+  }
 }

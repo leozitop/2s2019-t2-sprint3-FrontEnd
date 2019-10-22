@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 
 import logo from '../../assets/img/OpFlix_logo.png';
+import {Link} from 'react-router-dom';
 
 // axios
 import Axios from 'axios';
@@ -37,7 +38,7 @@ class Login extends Component{
                 // props => propriedades => herança
                 localStorage.setItem("usuario-opflix", response.data.token);
                 console.log(response.data.token);
-                this.props.history.push('/lancamentos');
+                this.props.history.push('/telaAdm');
             }else{
                 console.log('vish deu ruim');
             }
@@ -106,11 +107,12 @@ class Login extends Component{
                         <p>Faça seu cadastro 
                         <br/>caso ainda não tenha</p>
                     </div>
-                    <div className="item">
-                        <li>Cadastrar</li>
-                    </div>
+            
                     </div>
                 </form>
+                    <Link className="btn__cadastro__link" id="btn__cadastro__link" to='/cadastro'>
+                        <button>Cadastrar</button>
+                    </Link>
                 </div>
             </div>
         </section>

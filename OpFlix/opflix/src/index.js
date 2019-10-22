@@ -38,8 +38,8 @@ const routing = (
                 <Route exact path='/' component={App} />
                 <Route path='/login' component={Login}/>
                 <Route path='/cadastro' component={Cadastro}/>
-                <RotaPrivada path='/lancamentos' component={Lancamentos}/>
-                <Route path='/telaAdm' component={TelaAdm}/>
+                <Route path='/lancamentos' component={Lancamentos}/>
+                <RotaPrivada path='/telaAdm' component={TelaAdm}/>
                 <Route path='/telaAdmUser' component={TelaAdm_User}/>
                 <Route component={NaoEncontrado}/>
             </Switch>

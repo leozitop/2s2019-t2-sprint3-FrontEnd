@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 
 import logo from '../../assets/img/OpFlix_logo.png';
 import Axios from 'axios';
+import {Link} from 'react-router-dom';
 
 export default class Cadastro extends Component{
 
@@ -154,14 +155,11 @@ export default class Cadastro extends Component{
 
 
                     <div className="item">
-                    <button  
+                        <button   
                             onClick={this.adicionaItem}
                             id="btn__cadastrar"
                             className="conteudoPrincipal-btn conteudoPrincipal-btn-cadastro"
-                            >
-                        Cadastrar
-                    </button>
-
+                            >Cadastrar</button>
                     </div>
                 </form>
                 </div>
