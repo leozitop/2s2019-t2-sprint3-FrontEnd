@@ -88,38 +88,31 @@ function App() {
         </section>
 
         <section id="conteudoPrincipal-visao">
-          <h1 id="conteudoPrincipal-visao-titulo">Informações do OpFlix</h1>
+          <h2 id="conteudoPrincipal-visao-titulo">Informações do OpFlix</h2>
           <div className="container">
             <p className="visao-texto">
-              Com o OpFlix você tem segurança das suas informações<br />
-              O OpFlix oferece pra você filmes e séries fresquinhos qie acabaram de ser lançados<br />
-              Ele é rápido e eficaz<br />
+              - Com o OpFlix você tem segurança das suas informações<br />
+              - O OpFlix oferece pra você filmes e séries fresquinhos que acabaram de ser lançados<br />
+              - Ele é rápido e eficaz<br />
               </p>
           </div>
         </section>
 
-        <section id="conteudoPrincipal-contato">
-          <h1 id="conteudoPrincipal-contato-titulo">Contato</h1>
-          <div className="container conteudo-contato-titulo">
-            <div className="contato-mapa conteudo-contato-mapa"></div>
-            <div className="contato-endereco conteudo-contato-endereco">
-              Alameda Barão de Limeira, 539 <br />
-              São Paulo - SP
-            </div>
-          </div>
-        </section>
       </main>
 
       <footer className="rodapePrincipal">
         <section className="rodapePrincipal-patrocinadores">
           <div className="container">
-            <p>OpFlix</p>
+            <p>OpFlix - Avenida Barão de Limeira 539</p>
           </div>
           <div className="container">
             <p>Siga nossas redes sociais:</p>
-            <img src= {face}/>
-            <img src= {insta}/>
-            <img src= {twitter}/>
+            <div className='img'>
+              <img src= {face}/>
+              <img src= {insta}/>
+              <img src= {twitter}/>
+            </div>
+
           </div>
         </section>
       </footer>

@@ -3,6 +3,7 @@ import React,{Component} from 'react';
 import logo from '../../assets/img/OpFlix_logo.png';
 import Axios from 'axios';
 import {Link} from 'react-router-dom';
+import {parseJwt} from '../../auth/auth';
 
 export default class Cadastro extends Component{
 
@@ -15,30 +16,7 @@ export default class Cadastro extends Component{
             senha: '',
             tipoUsuario: ''
         };
-    }
-
-    componentDidMount(){
-        this.listaAtualizada();
-    }
-
-    listaAtualizada = () =>{
-        fetch('http://localhost:5000/api/usuarios', {
-            headers: {
-                Accept: 'application/json',
-                Authorization: 'Bearer ' + localStorage.getItem('usuario-opflix')
-                // 'Content-Type': 'application/json'
-            }
-        })
-            .then(response => response.json())
-            .then(data => this.setState({lista: data}));
-        // Axios.get('http://localhost:5000/api/usuarios', {
-        //     headers: {
-        //         Authorization: 'Bearer ' + localStorage.getItem('usuario-opflix')
-        //     }
-        // })
-        // .then(data =>{
-        //     console.log(data);
-        // })
+        this.adicionaItem = this.adicionaItem.bind(this);
     }
 
     adicionaItem = (event) =>{
@@ -69,6 +47,10 @@ export default class Cadastro extends Component{
         this.setState({senha: event.target.value});
     }
 
+    atualizarPermissao = (event) =>{
+        this.setState({tipoUsuario: event.target.value});
+    }
+
     adicionaUsuario = () =>{
         let valores_lista = this.state.lista;
         let usuario = {idUsuario: this.state.lista.length,
@@ -80,6 +62,10 @@ export default class Cadastro extends Component{
 
         valores_lista.push(usuario);
         this.setState({lista: valores_lista});
+    }
+
+    componentWillMount(){
+        this.setState({tipoUsuario: parseJwt().tipoUsuario})
     }
 
     render(){
@@ -104,7 +90,7 @@ export default class Cadastro extends Component{
                         placeholder="nome"
                         type="text"
                         value={this.state.nome}
-                        onInput={this.atualizarNome}
+                        onChange={this.atualizarNome.bind(this)}
                         name="username"
                         id="cadastro__nome"
                     />
@@ -121,7 +107,7 @@ export default class Cadastro extends Component{
                         placeholder="email"
                         type="text"
                         value={this.state.email}
-                        onInput={this.atualizarEmail}
+                        onChange={this.atualizarEmail.bind(this)}
                         name="username"
                         id="cadastro__email"
                     />
@@ -138,21 +124,24 @@ export default class Cadastro extends Component{
                         placeholder="senha"
                         type="password"
                         value={this.state.senha}
-                        onInput={this.atualizarSenha}
+                        onChange={this.atualizarSenha.bind(this)}
                         name="password"
                         id="cadastro__password"
                     />
                     </div>
 
                     <div className="item">
-                    <p>Tipo do Usuario</p>
-                    <select>
-                        <option value='0' disabled>permissao</option>
-                        <option value={this.state.tipoUsuario}>Administrador</option>
-                        <option value={this.state.tipoUsuario}>Cliente</option>
-                    </select>
+                    <p>Permissao</p>
+                    <input
+                        className="input__cadastro"
+                        placeholder="permissão"
+                        type="text"
+                        value={this.state.tipoUsuario}
+                        onChange={this.atualizarPermissao.bind(this)}
+                        name="tipoUsuario"
+                        id="cadastro__permissao"
+                    />
                     </div>
-
 
                     <div className="item">
                         <button   

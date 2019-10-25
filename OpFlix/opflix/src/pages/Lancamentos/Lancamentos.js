@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import logo from '../../assets/img/OpFlix_logo.png'
 import Titulo from '../../components/Titulo/Titulo'
 
-import cartaz1 from '../../assets/img/cartaz_joker.jpg'
-
 import Axios from 'axios';
 
 export default class Lancamentos extends Component {
