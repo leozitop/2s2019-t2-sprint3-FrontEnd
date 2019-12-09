@@ -22,7 +22,7 @@ export default class Cadastro extends Component{
     adicionaItem = (event) =>{
         event.preventDefault();
         console.log(this.state.nome);
-        fetch('http://localhost:5000/api/usuarios', {
+        fetch('http://192.168.4.199:5000/api/usuarios', {
             method: 'POST',
             body: JSON.stringify({nome: this.state.nome, email: this.state.email,
             senha: this.state.senha, tipoUsuario: this.state.tipoUsuario}),
@@ -72,12 +72,11 @@ export default class Cadastro extends Component{
         return(
             <section className="container flex">
             <div className="item__cadastro">
-                <div className="row">
                 <div className="item">
-                    <img src= {logo} className="icone__cadastro" />
+                    <img width='300px' src= {logo} className="icone__cadastro" />
                 </div>
                 
-                <form>
+                <form class="form-group">
                     <div className="item" id="item__title">
                         <p className="text__cadastro" id="item__description">
                         Cadastro
@@ -129,6 +128,10 @@ export default class Cadastro extends Component{
                         id="cadastro__password"
                     />
                     </div>
+                    
+                    <br/>
+                    
+                    <br/>
 
                     <div className="item">
                     <p>Permissao</p>
@@ -143,15 +146,16 @@ export default class Cadastro extends Component{
                     />
                     </div>
 
+                    <br/>
+
                     <div className="item">
                         <button   
                             onClick={this.adicionaItem}
                             id="btn__cadastrar"
-                            className="conteudoPrincipal-btn conteudoPrincipal-btn-cadastro"
+                            className="btn btn-danger"
                             >Cadastrar</button>
                     </div>
                 </form>
-                </div>
             </div>
         </section>
         );

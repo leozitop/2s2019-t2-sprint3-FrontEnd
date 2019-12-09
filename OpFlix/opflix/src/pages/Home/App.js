@@ -18,7 +18,6 @@ import {Link} from 'react-router-dom';
 function App() {
   return (
     <div className="App">
-      <div>
       <header className="cabecalhoPrincipal">
         <div className="container">
           {/* referente ao java script */}
@@ -54,10 +53,10 @@ function App() {
         </section>
 
         <section id="conteudoPrincipal-eventos">
-          <h2 id="conteudoPrincipal-eventos-titulo">Opiniões</h2>
           <div className="container">
             <nav>
               <ul className="conteudoPrincipal-dados">
+          <h2 id="conteudoPrincipal-eventos-titulo">Opiniões</h2>
                 <li className="conteudoPrincipal-dados-link eventos">
                   <h3>Usuario 1</h3>
                   <p>
@@ -87,17 +86,6 @@ function App() {
           </div>
         </section>
 
-        <section id="conteudoPrincipal-visao">
-          <h2 id="conteudoPrincipal-visao-titulo">Informações do OpFlix</h2>
-          <div className="container">
-            <p className="visao-texto">
-              - Com o OpFlix você tem segurança das suas informações<br />
-              - O OpFlix oferece pra você filmes e séries fresquinhos que acabaram de ser lançados<br />
-              - Ele é rápido e eficaz<br />
-              </p>
-          </div>
-        </section>
-
       </main>
 
       <footer className="rodapePrincipal">
@@ -105,18 +93,14 @@ function App() {
           <div className="container">
             <p>OpFlix - Avenida Barão de Limeira 539</p>
           </div>
-          <div className="container">
-            <p>Siga nossas redes sociais:</p>
-            <div className='img'>
-              <img src= {face}/>
-              <img src= {insta}/>
-              <img src= {twitter}/>
-            </div>
+          <div className="midias">
+            <img width='40px' height='40px' border-radius='20px' src= {face}/>
+            <img width='40px' height='40px' border-radius='20px' src= {insta}/>
+            <img width='40px' height='40px' border-radius='20px' src= {twitter}/>
 
           </div>
         </section>
       </footer>
-    </div>
     </div>
   );
 }

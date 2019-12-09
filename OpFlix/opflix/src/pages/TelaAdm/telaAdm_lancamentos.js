@@ -13,17 +13,17 @@ export default class telaAdm_lancamentos extends Component{
             lancamento: '',
             sinopse: '',
             duracao: '',
-            data: ''
+            dataLancamento: ''
         };
         this.cadastrarLancamento = this.cadastrarLancamento.bind(this);
     }
 
     cadastrarLancamento(event) {
         event.preventDefault();
-        fetch("http://localhost:5000/api/lancamentos", {
+        fetch("http://192.168.4.199:5000/api/lancamentos", {
             method: "POST",
             body: JSON.stringify({ lancamento: this.state.lancamento, sinopse: this.state.sinopse, 
-                duracao: this.state.duracao, data: this.state.data}),
+                duracao: this.state.duracao, data: this.state.dataLancamento}),
             headers: {
                 "Content-Type": "application/json",
                 "Accept" : "application/json"
@@ -46,7 +46,7 @@ export default class telaAdm_lancamentos extends Component{
     }
 
     atualizarDataLancamento(event) {
-        this.setState({ data: event.target.value })
+        this.setState({ dataLancamento: event.target.value })
     } 
 
     componentDidMount(){
@@ -56,20 +56,14 @@ export default class telaAdm_lancamentos extends Component{
     render(){   
         return(
         <div>
-                <header className="cabecalhoPrincipal">
-                    <div className="container">
-                    <img src={logo} />
+                <div className="container">
+                    <img className="icone__cadastro" src={logo} />
 
-                    <nav className="cabecalhoPrincipal-nav">
-                        {this.state.tipoUsuario}
-                    </nav>
-                    </div>
-                </header>
+                </div>
 
                 <main className="conteudoPrincipal">
                     <section className="conteudoPrincipal-cadastro">
-                    <h1 className="conteudoPrincipal-cadastro-titulo">Lançamentos</h1>
-                    <div className="container" id="conteudoPrincipal-lista">
+                    {/* <div className="container" id="conteudoPrincipal-lista">
                         <table id="tabela-lista">
                         <thead>
                             <tr>
@@ -80,13 +74,10 @@ export default class telaAdm_lancamentos extends Component{
 
                         <tbody id="tabela-lista-corpo"></tbody>
                         </table>
-                    </div>
+                    </div> */}
                    
                         <div className="container" id="conteudoPrincipal-cadastro">
-                        <h2 className="conteudoPrincipal-cadastro-titulo">
-                        Cadastrar Lançamento
-                        </h2>
-                        <form onSubmit={this.cadastrarLancamento }>
+                        <form class="form-group" onSubmit={this.cadastrarLancamento }>
                         <div className="container">
                             <input
                             type="text"
@@ -117,7 +108,7 @@ export default class telaAdm_lancamentos extends Component{
                             className="className__datalancamento"
                             id="input__datalancamento"
                             placeholder="Data de Lançamento"
-                            value={this.state.data}
+                            value={this.state.dataLancamento}
                             onChange={this.atualizarDataLancamento.bind(this)}
                             />
                             <button

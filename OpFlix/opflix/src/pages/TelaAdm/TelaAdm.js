@@ -21,7 +21,7 @@ export default class TelaAdm extends Component {
 
  // *CATEGORIAS* 
   listaCagtegoria = (event) => {
-    Axios.get('http://localhost:5000/api/categorias', {
+    Axios.get('http://192.168.4.199:5000/api/categorias', {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer' + localStorage.getItem('usuario-opflix')
@@ -39,7 +39,7 @@ export default class TelaAdm extends Component {
   //criar uma funcao para enviar os dados para a api
   adicionaItem = (event) => {
     event.preventDefault();
-    fetch('http://localhost:5000/api/categorias', {
+    fetch('http://192.168.4.199:5000/api/categorias', {
       method: 'POST',
       body: JSON.stringify({ nome: this.state.nome }),
       headers: {
@@ -69,58 +69,71 @@ export default class TelaAdm extends Component {
     return (
       <section className="container flex">
         <div className="item__cadastro">
-          <div className="row">
             <div className="item">
               <img src={logo} className="icone__cadastro" />
             </div>
 
-            <div className="item" id="item__title">
-              <h2>
-                Tela do Administrador
-              </h2>
-            </div>
+            <div className="telaAdmin">
 
-            <div>
-              <table id="tabela-lista-categorias">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Nome</th>
-                  </tr>
-                </thead>
+              <div  class="table table-dark" >
+                <table id="tabela-lista-categorias">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Nome</th>
+                    </tr>
+                  </thead>
 
-                <tbody id="tabela-lista-corpo">
-                  {
-                    // map retorna algo, funciona como se fosse um foreach
-                    this.state.lista.map(element => {
-                      return (
-                        <tr>
-                          <td>{element.idCategoria}</td>
-                          <td>{element.nome}</td>
-                        </tr>
-                      )
-                    })
-                  }
-                </tbody>
-              </table>
+                  <tbody id="tabela-lista-corpo">
+                    {
+                      // map retorna algo, funciona como se fosse um foreach
+                      this.state.lista.map(element => {
+                        return (
+                          <tr>
+                            <td>{element.idCategoria}</td>
+                            <td>{element.nome}</td>
+                          </tr>
+                        )
+                      })
+                    }
+                  </tbody>
+                </table>
 
-              <form onSubmit={this.adicionaItem}>
-                <div className="container">
-                  <input type="text"
-                    onInput={this.atualizarNome}
-                    value={this.state.nome}
-                    id="categoria__titulo"
-                    placeholder="nome" />
-                </div>
-                <button className="conteudoPrincipal-btn conteudoPrincipal-btn-cadastro"
-                >Cadastrar</button>
-                <button OnClick={this.listaCategoria}>Listar Categorias</button>
-              </form>
-            </div>
+              </div>
 
             
-            <Link className='link-telaUsuarios' to='/telaAdmUser'>Ir para Usuarios</Link>
-          </div>
+              <form class="form-group" onSubmit={this.adicionaItem}>
+                  <div className="container">
+                    <input type="text"
+                      onInput={this.atualizarNome}
+                      value={this.state.nome}
+                      id="categoria__titulo"
+                      placeholder="nome" />
+                  </div>
+
+                    <br/>
+
+                  <button className="btn btn-danger"
+                  >Cadastrar</button>
+
+                    <br/>
+
+                    <br/>
+
+                  <button className="btn btn-danger" OnClick={this.listaCategoria}>Listar Categorias</button>
+
+                  <br/>
+
+                  <br/>
+
+                  <Link className='link-telaUsuarios' to='/telaAdmUser'>Ir para Usuarios</Link>
+                  <br/>
+                  <Link className='link-telaLancamentos' to='/telaAdmLancamentos'>Ir para Lancamentos</Link>
+                </form>
+
+              </div>
+
+            
         </div>
       </section>
     );

@@ -1,24 +1,29 @@
 body {
-    background-color: #d6d6d6;
+    background-color: #000;
     font-family: "Open Sans", "Raleway", Arial, sans-serif;
     color: black;
-  }
-  
-  .container {
-    width: 94%;
-    margin: 0 auto;
+}
+
+  .cabecalhoPrincipal {
+    width: 100%;
+    margin-right: 40em;
   }
 
   .cabecalhoPrincipal > .container {
-      background-color: #d6d6d6;
+      background-color: black;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       padding-bottom: 20px;
   }
 
+  .App {
+    background-color: black;
+  }
+
   .cabecalhoPrincipal img {
-    width: 120px;
+    width: 200px;
+    height: 120px;
   }
 
   .cabecalhoPrincipal-nav{
@@ -29,8 +34,14 @@ body {
   
   .cabecalhoPrincipal-nav a {
     text-decoration: none;
-    color: #ad1923;
+    color: red;
+    font-size: 30px;
     padding-right: 10px;
+  }
+
+  .cabecalhoPrincipal-nav a:hover{
+    color: white;
+    text-decoration: none;
   }
 
   nav .cabecalhoPrincipal-nav-login {
@@ -115,3 +126,63 @@ body {
     2px 2px #000000;
   }
 
+  .midias {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .conteudoPrincipal-dados{
+    background-color: black;
+    margin-top: 50px;
+    margin-left: 65px;
+    margin-right: 65px;
+    margin-bottom: 80px;
+  }
+
+  #conteudoPrincipal-destaque{
+    background-color: black;
+    padding-top: 25px;
+    margin-left: 300px;
+    margin-right: 300px;
+    padding-bottom: 40px;
+  }
+
+  .lancamentos{
+    background-color: #000000;
+    padding-bottom: 30px;
+  }
+
+  .logo_lancamentos {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 40px;
+  }
+
+  .logo_telaAdm1 {
+    align-items: center;
+  }
+
+  .telaAdmin {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .link-telaUsuarios {
+    text-decoration: none;
+    color: #ad1923;
+  }
+
+  /* .telaAdmUser {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  } */
+
+  .link-telaLancamentos {
+    text-decoration: none;
+    color: #ad1923;
+  }
