@@ -10,6 +10,7 @@ import Lancamentos from './pages/Lancamentos/Lancamentos';
 import TelaAdm from './pages/TelaAdm/TelaAdm';
 import TelaAdm_User from './pages/TelaAdm/TelaAdm_User';
 import TelaAdm_Lancamentos from './pages/TelaAdm/telaAdm_lancamentos';
+import Localizacoes from './pages/Localizacao/Localizacoes';
 
 import * as serviceWorker from './serviceWorker';
 import {Route, Link, BrowserRouter as Router, Switch, Redirect} from 'react-router-dom';
@@ -40,6 +41,7 @@ const routing = (
                 <Route path='/login' component={Login}/>
                 <Route path='/cadastro' component={Cadastro}/>
                 <Route path='/lancamentos' component={Lancamentos}/>
+                <Route path='/localizacoes' component={Localizacoes}/>
                 <RotaPrivada path='/telaAdm' component={TelaAdm}/>
                 <Route path='/telaAdmUser' component={TelaAdm_User}/>
                 <Route path='/telaAdmLancamentos' component={TelaAdm_Lancamentos} />

@@ -1,40 +1,74 @@
 
 import React,{Component} from 'react';
 import logo from '../../assets/img/OpFlix_logo_adm.png';
-import { parseJwt } from "../../auth/auth";
+// import { parseJwt } from "../../auth/auth";
+import Axios from 'axios';
 
 export default class telaAdm_lancamentos extends Component{
     constructor(){
         super();
+        // this.state = {
+        //     Permissao : ''
+        // };
         this.state = {
-            Permissao : ''
-        };this.state = {
             lista: [],
-            lancamento: '',
+            nome: '',
             sinopse: '',
             duracao: '',
             dataLancamento: ''
         };
-        this.cadastrarLancamento = this.cadastrarLancamento.bind(this);
+        //this.cadastrarLancamento = this.cadastrarLancamento.bind(this);
     }
 
-    cadastrarLancamento(event) {
-        event.preventDefault();
-        fetch("http://192.168.4.199:5000/api/lancamentos", {
-            method: "POST",
-            body: JSON.stringify({ lancamento: this.state.lancamento, sinopse: this.state.sinopse, 
-                duracao: this.state.duracao, data: this.state.dataLancamento}),
-            headers: {
-                "Content-Type": "application/json",
-                "Accept" : "application/json"
-            }
+    componentDidMount() {
+        this.listaLancamentos();
+      }
+    
+    listaLancamentos = (event) => {
+      Axios.get('http://192.168.4.199:5000/api/lancamentos', {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer' + localStorage.getItem('usuario-opflix')
+        }
+      })
+        .then(resposta => {
+          console.log(resposta);
+          this.setState({ lista: resposta.data });
         })
-        .then(response => response.json())
-        .catch(error => console.log(error));
-   }
+        .catch(erro => {
+          console.log(erro);
+        });
+    }
 
-   atualizarTitulo(event) {
-        this.setState({ lancamento: event.target.value })
+    //criar uma funcao para enviar os dados para a api
+    adicionaItem = (event) => {
+      event.preventDefault();
+      fetch('http://192.168.4.199:5000/api/lancamentos', {
+        method: 'POST',
+        body: JSON.stringify({ nome: this.state.nome, sinopse: this.state.sinopse, 
+            duracao: this.state.duracao, data: this.state.dataLancamento }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('usuario-opflix')
+        }
+      })
+        .then(response => response.json())
+        .then(this.componentDidMount())
+        .catch(erro => console.log(erro));
+    }
+
+    adicionaLancamento = () => {
+        let valores_lista = this.state.lista;
+        let lancamentos = { nome: this.state.nome, sinopse: this.state.sinopse, 
+            duracao: this.state.duracao, data: this.state.dataLancamento }
+    
+        valores_lista.push(lancamentos);
+    
+        this.setState({ lista: valores_lista });
+      }
+
+   atualizarNome(event) {
+        this.setState({ nome: event.target.value })
     }
 
     atualizarSinopse(event) {
@@ -49,16 +83,15 @@ export default class telaAdm_lancamentos extends Component{
         this.setState({ dataLancamento: event.target.value })
     } 
 
-    componentDidMount(){
-    this.setState({Permissao: parseJwt().Permissao})
-    }
+    // componentDidMount(){
+    // this.setState({Permissao: parseJwt().Permissao})
+    // }
 
     render(){   
         return(
         <div>
-                <div className="container">
-                    <img className="icone__cadastro" src={logo} />
-
+                <div className="icone__cadastro">
+                    <img className="logo_admLancamentos" src={logo} />
                 </div>
 
                 <main className="conteudoPrincipal">
@@ -77,47 +110,65 @@ export default class telaAdm_lancamentos extends Component{
                     </div> */}
                    
                         <div className="container" id="conteudoPrincipal-cadastro">
-                        <form class="form-group" onSubmit={this.cadastrarLancamento }>
-                        <div className="container">
+                        <form class="form-group" onSubmit={this.adicionaItem}>
                             <input
                             type="text"
                             className="className__titulo"
                             id="input__titulp"
                             placeholder="Título"
-                            value={this.state.lancamento}
-                            onChange={this.atualizarTitulo.bind(this)}
+                            value={this.state.nome}
+                            onInput={this.atualizarNome.bind(this)}
                             />
+                            
+                            <br/>
+
+                            <br/>
+
                             <input
                             type="text"
                             className="className__sinopse"
                             id="input__sinopse"
                             placeholder="Sinopse"
                             value={this.state.sinopse}
-                            onChange={this.atualizarSinopse.bind(this)}
+                            onInput={this.atualizarSinopse.bind(this)}
                             />
+                            
+                            <br/>
+
+                            <br/>
+
                             <input
                             type="text"
                             className="className__tempoduracao"
                             id="input__tempoduracao"
                             placeholder="Tempo de Duração"
                             value={this.state.duracao}
-                            onChange={this.atualizarTempoDuracao.bind(this)}
+                            onInput={this.atualizarTempoDuracao.bind(this)}
                             />
+
+                            <br/>
+
+                            <br/>
+
                             <input
                             type="text"
                             className="className__datalancamento"
                             id="input__datalancamento"
                             placeholder="Data de Lançamento"
                             value={this.state.dataLancamento}
-                            onChange={this.atualizarDataLancamento.bind(this)}
+                            onInput={this.atualizarDataLancamento.bind(this) }
                             />
+                            
+                            <br/>
+
+                            <br/>  
+
                             <button
                             id="btn__cadastrar"
-                            className="conteudoPrincipal-btn conteudoPrincipal-btn-cadastro"
+                            className="btn btn-danger"
                             >
                             Cadastrar
                             </button>
-                        </div>
                         </form>
                     </div>
                     
