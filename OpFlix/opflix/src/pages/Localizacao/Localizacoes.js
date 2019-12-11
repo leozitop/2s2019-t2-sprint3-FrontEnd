@@ -35,7 +35,7 @@ class Localizacoes extends Component {
       .then(response => {
         this.setState({ lista: response.data })
         console.log(this.state)
-      })
+    })
   }
 
   adicionaItem = (event) => {
@@ -50,7 +50,6 @@ class Localizacoes extends Component {
     })
       .then(this.listaAtualizadaLocal())
       .catch(error => console.log(error))
-
   }
 
   render() {
@@ -58,7 +57,7 @@ class Localizacoes extends Component {
       <div>
         <Map
           google={this.props.google}
-          zoom={8}
+          zoom={5}
           style={{ width: '100%', height: '100%' }}
           initialCenter={{ lat: 47.444, lng: -122.176 }}
         >
@@ -67,24 +66,14 @@ class Localizacoes extends Component {
               <Marker position={{ lat: element.latitude, lng: element.longitude }} text={element.nomeLancamento} label={element.nomeLancamento.toString()} onClick={() => this.handleToggleOpen()}>
                 {
                   this.state.isOpen &&
-                  <InfoWindow onCloseClick={this.props.handleCloseCall}>
-
-                  </InfoWindow>
+                  <InfoWindow onCloseClick={this.props.handleCloseCall}></InfoWindow>
                 }
               </Marker>
             )
-
           })}
-
         </Map>
-
-
       </div>
-
     );
-
   }
 }
-export default GoogleApiWrapper({
-
-})(Localizacoes);
+export default GoogleApiWrapper({})(Localizacoes);
