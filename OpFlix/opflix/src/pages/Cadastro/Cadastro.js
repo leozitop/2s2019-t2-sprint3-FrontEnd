@@ -22,7 +22,7 @@ export default class Cadastro extends Component{
     adicionaItem = (event) =>{
         event.preventDefault();
         console.log(this.state.nome);
-        fetch('http://192.168.4.199:5000/api/usuarios', {
+        fetch('http://192.168.3.160:5000/api/usuarios', {
             method: 'POST',
             body: JSON.stringify({nome: this.state.nome, email: this.state.email,
             senha: this.state.senha, tipoUsuario: this.state.tipoUsuario}),

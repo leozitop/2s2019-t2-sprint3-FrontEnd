@@ -21,7 +21,7 @@ export default class TelaAdm extends Component {
 
  // *CATEGORIAS* 
   listaCagtegoria = (event) => {
-    Axios.get('http://192.168.4.199:5000/api/categorias', {
+    Axios.get('http://192.168.3.160:5000/api/categorias', {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer' + localStorage.getItem('usuario-opflix')
@@ -39,7 +39,7 @@ export default class TelaAdm extends Component {
   //criar uma funcao para enviar os dados para a api
   adicionaItem = (event) => {
     event.preventDefault();
-    fetch('http://192.168.4.199:5000/api/categorias', {
+    fetch('http://192.168.3.160:5000/api/categorias', {
       method: 'POST',
       body: JSON.stringify({ nome: this.state.nome }),
       headers: {

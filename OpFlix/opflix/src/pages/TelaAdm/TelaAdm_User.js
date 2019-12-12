@@ -18,7 +18,7 @@ export default class TelaAdm_User extends Component {
 
   listaUsuarios = (event) => {
     event.preventDefault();
-    Axios.get('http://192.168.4.199:5000/api/usuarios', {
+    Axios.get('http://192.168.3.160:5000/api/usuarios', {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer' + localStorage.getItem('usuario-opflix')
@@ -54,6 +54,8 @@ export default class TelaAdm_User extends Component {
               />
             </div>
 
+            <br/>
+
             <div className="item">
               <p>Permissao</p>
               <input
@@ -64,6 +66,8 @@ export default class TelaAdm_User extends Component {
               />
             </div>
 
+            <br/>
+
             <div className="item">
               <p>Email</p>
               <input
@@ -73,6 +77,8 @@ export default class TelaAdm_User extends Component {
                 name="user_email"
               />
             </div>
+
+            <br/>
 
             <div className="item">
               <p>Senha</p>

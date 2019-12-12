@@ -43,7 +43,7 @@ export default class telaAdm_lancamentos extends Component{
     //criar uma funcao para enviar os dados para a api
     adicionaItem = (event) => {
       event.preventDefault();
-      fetch('http://192.168.4.199:5000/api/lancamentos', {
+      fetch('http://192.168.3.160:5000/api/lancamentos', {
         method: 'POST',
         body: JSON.stringify({ nome: this.state.nome, sinopse: this.state.sinopse, 
             duracao: this.state.duracao, data: this.state.dataLancamento }),

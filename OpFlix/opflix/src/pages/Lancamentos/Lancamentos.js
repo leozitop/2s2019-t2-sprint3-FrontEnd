@@ -23,7 +23,7 @@ export default class Lancamentos extends Component {
   }
 
   listaLancamentos = (event) => {
-    Axios.get('http://192.168.4.199:5000/api/lancamentos')
+    Axios.get('http://192.168.3.160:5000/api/lancamentos')
       .then(data => {
         this.setState({ lista: data.data });
       })
@@ -76,7 +76,7 @@ export default class Lancamentos extends Component {
                             <td>{element.duracao}</td>
                             <td>{element.dataLancamento}</td>
                             <div className='imagemLancamentos'>
-                              <img width='100px' height='150px' src={element.imagem}></img>
+                              <img width='100px' src={element.imagem}></img>
                             </div>
                           </tr>
                         

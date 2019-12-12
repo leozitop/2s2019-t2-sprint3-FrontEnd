@@ -30,7 +30,7 @@ class Localizacoes extends Component {
   }
 
   listaAtualizadaLocal = () => {
-    Axios.get('http://192.168.4.199:5000/api/localizacoes'
+    Axios.get('http://192.168.3.160:5000/api/localizacoes'
     )
       .then(response => {
         this.setState({ lista: response.data })
@@ -41,7 +41,7 @@ class Localizacoes extends Component {
   adicionaItem = (event) => {
     event.preventDefault();
     console.log(this.state.lista);
-    fetch('http://192.168.4.199:5000/api/lancamentos', {
+    fetch('http://192.168.3.160:5000/api/lancamentos', {
       method: 'POST',
       body: JSON.stringify({ lista: this.state.lista }),
       headers: {
@@ -57,7 +57,7 @@ class Localizacoes extends Component {
       <div>
         <Map
           google={this.props.google}
-          zoom={5}
+          zoom={3.2}
           style={{ width: '100%', height: '100%' }}
           initialCenter={{ lat: 47.444, lng: -122.176 }}
         >
